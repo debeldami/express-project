@@ -1,6 +1,16 @@
 const express = require('express');
 const app = express();
 
+app.use((req, res, next) => {
+  const start = Date.now();
+
+  next();
+
+  const delta = Date.now() - start;
+
+  console.log(console.log(`${req.method} ... ${req.url} ... ${delta}ms`));
+});
+
 const friends = [
   {
     id: 0,
