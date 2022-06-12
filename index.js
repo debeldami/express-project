@@ -11,6 +11,8 @@ app.use((req, res, next) => {
   console.log(console.log(`${req.method} ... ${req.url} ... ${delta}ms`));
 });
 
+app.use(express.json());
+
 const friends = [
   {
     id: 0,
@@ -47,6 +49,23 @@ app.get('/friends/:id', (req, res) => {
       error: 'friend not found',
     });
   }
+});
+
+app.post('/friends', (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).json({
+      error: 'missing friends name',
+    });
+  }
+
+  const newFriend = {
+    id: friends.length,
+    name: req.body.name,
+  };
+
+  friends.push(newFriend);
+
+  res.json(newFriend);
 });
 
 app.listen(PORT, () => {
