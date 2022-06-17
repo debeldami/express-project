@@ -22,7 +22,7 @@ function getFriends(req, res) {
 }
 
 function getFriend(req, res) {
-  const id = Number(req.params.id);
+  const id = Number(req.params.friendsId);
   const friend = friends[id];
 
   if (friend) {
